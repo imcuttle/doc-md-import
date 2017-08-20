@@ -1,4 +1,4 @@
-process.env.DEBUG = '1'
+// process.env.DEBUG = '1'
 
 var actions = require('./lib/actions')
 var utils = require('./lib/utils')
