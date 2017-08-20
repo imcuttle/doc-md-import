@@ -27,7 +27,7 @@ if (opt.help) {
     console.log('     set-address [doc web address]             default: ' + default_address);
     console.log('     [title]                              default: ' + default_title);
     console.log('');
-    console.log('  Exapmle:');
+    console.log('  Examples:');
     console.log('');
     console.log('     cat markdown.md | docin');
     console.log('     echo "# Hello" | docin');
