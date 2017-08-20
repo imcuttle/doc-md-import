@@ -1,0 +1,251 @@
+[
+  {
+    "type": "head",
+    "value": "# A\n",
+    "id": 1
+  },
+  {
+    "type": "head",
+    "value": "# 1\n",
+    "id": 2
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 3,
+    "parent": 2
+  },
+  {
+    "type": "head",
+    "value": "### 3\n",
+    "id": 4,
+    "parent": 2
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 5,
+    "parent": 4
+  },
+  {
+    "type": "head",
+    "value": "### 3\n",
+    "id": 6,
+    "parent": 2
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 7,
+    "parent": 6
+  },
+  {
+    "type": "head",
+    "value": "# 1-1\n",
+    "id": 8
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 9,
+    "parent": 8
+  },
+  {
+    "type": "head",
+    "value": "## 2\n",
+    "id": 10,
+    "parent": 8
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 11,
+    "parent": 10
+  },
+  {
+    "type": "unrelated",
+    "value": "#ss\n",
+    "id": 12,
+    "parent": 10
+  },
+  {
+    "type": "unrelated",
+    "value": "i'm an apple.     \n",
+    "id": 13,
+    "parent": 10
+  },
+  {
+    "type": "unrelated",
+    "value": "i'm an egg.       \n",
+    "id": 14,
+    "parent": 10
+  },
+  {
+    "type": "block",
+    "value": "> ```             \n> code A           \n> ```      \n",
+    "id": 15,
+    "parent": 10
+  },
+  {
+    "type": "block",
+    "value": "```\ncode C\n```",
+    "id": 16,
+    "parent": 10
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 17,
+    "parent": 10
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 18,
+    "parent": 10
+  },
+  {
+    "type": "block",
+    "value": "|sds|xsd|\n|--|:--:|\n|sd|xxxx|\n\n",
+    "id": 19,
+    "parent": 10
+  },
+  {
+    "type": "head",
+    "value": " ## A-1             \n",
+    "id": 20,
+    "parent": 8
+  },
+  {
+    "type": "empty",
+    "value": "                  \n",
+    "id": 21,
+    "parent": 20
+  },
+  {
+    "type": "unrelated",
+    "value": "text in A-1       \n",
+    "id": 22,
+    "parent": 20
+  },
+  {
+    "type": "empty",
+    "value": "                  \n",
+    "id": 23,
+    "parent": 20
+  },
+  {
+    "type": "list",
+    "value": "1. A-1-1           \n",
+    "id": 24,
+    "parent": 20
+  },
+  {
+    "type": "unrelated",
+    "value": "description1 in A-1-1   \n",
+    "id": 25,
+    "parent": 24
+  },
+  {
+    "type": "unrelated",
+    "value": "description2 in A-1-1\n",
+    "id": 26,
+    "parent": 24
+  },
+  {
+    "type": "list",
+    "value": "2. A-1-2\n",
+    "id": 27,
+    "parent": 20
+  },
+  {
+    "type": "unrelated",
+    "value": "description in A-1-2\n",
+    "id": 28,
+    "parent": 27
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 29,
+    "parent": 27
+  },
+  {
+    "type": "unrelated",
+    "value": "#ss\n",
+    "id": 30,
+    "parent": 20
+  },
+  {
+    "type": "list",
+    "value": "3. A-1-3\n",
+    "id": 31,
+    "parent": 20
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 32,
+    "parent": 31
+  },
+  {
+    "type": "list",
+    "value": " - ssds  \n",
+    "id": 33,
+    "parent": 31
+  },
+  {
+    "type": "list",
+    "value": "  - xxxsw \n",
+    "id": 34,
+    "parent": 33
+  },
+  {
+    "type": "head",
+    "value": "## xx是多少\n",
+    "id": 35,
+    "parent": 34
+  },
+  {
+    "type": "list",
+    "value": "    - ### sssd\n",
+    "id": 36,
+    "parent": 35
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 37,
+    "parent": 36
+  },
+  {
+    "type": "head",
+    "value": "## ssx\n",
+    "id": 38,
+    "parent": 8
+  },
+  {
+    "type": "unrelated",
+    "value": "not description\n",
+    "id": 39,
+    "parent": 38
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 40,
+    "parent": 38
+  },
+  {
+    "type": "block",
+    "value": "~~~\ncode B\n~~~",
+    "id": 41,
+    "parent": 38
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 42,
+    "parent": 38
+  }
+]

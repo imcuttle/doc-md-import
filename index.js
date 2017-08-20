@@ -1,57 +1,55 @@
-process.env.DEBUG = '1'
+// process.env.DEBUG = '1'
 
 var actions = require('./lib/actions')
 var utils = require('./lib/utils')
 var fs = require('fs')
 
-var text = fs.readFileSync('./test/md.md').toString();
-var pwd = fs.readFileSync('./password').toString();
 
-actions
-    .login('yucong02', pwd)
-    /*.then(function (passed) {
-        if (passed) {
-            return actions.newDocument('GoJS Detail')
-        }
-    })*/
+module.exports = function (opt) {
+    if (!opt.username
+        || !opt.password
+        || !opt.markdown
+        || !opt.title
+        || !opt.address) {
+        return Promise.reject(new Error('存在未设置的配置'));
+    }
 
-    .then(function (passed) {
-        if (passed) {
-            return actions.getList()
-        }
-    })
-    .then(function (passed) {
-        if (passed) {
-            return actions.rename('Doc Import Test')
-        }
-    })
-    .then(function (passed) {
-        if (passed) {
-            var items = utils.generateItems(text);
-            actions.patch(items)
-            // return Promise.all([
-            //     actions.patch(items.slice(0, 20)),
-            //     actions.patch(items.slice(20))
-            // ])
-        }
-    })
-    .then(function () {
-        // if (obj.passed) {
-        //     var items = obj.items;
-        //     return actions.patch(items.slice(0, 20));
-        // }
-    })
+    if (opt.verbose) {
+        process.env.DEBUG = '1'
+    } else {
+        delete process.env.DEBUG
+    }
 
-
-/*actions
-    .login('yucong02', pwd)
-    .then(function (p) {
-        if (p) {
-            actions._setData({
-                listId: '217945995420ed3411',
-                synced: Date.now()
-            })
-            var id_seq = 1696648
-            actions.addItems(utils.generateItems(text))
-        }
-    })*/
+    return actions
+        .set('address', opt.address)
+        .login(opt.username, opt.password)
+        .then(function (passed) {
+            if (passed) {
+                return actions.getList()
+            } else {
+                return Promise.reject(new Error('登录失败'));
+            }
+        })
+        .then(function (passed) {
+            if (passed) {
+                return actions.rename(opt.title)
+            } else {
+                return Promise.reject(new Error('获取文章'));
+            }
+        })
+        .then(function (passed) {
+            if (passed) {
+                var items = utils.generateItems(opt.markdown);
+                return actions.patch(items)
+            } else {
+                return Promise.reject(new Error('修改文章名失败'));
+            }
+        })
+        .then(function (passed) {
+            if (passed) {
+                return actions.getListId()
+            } else {
+                return Promise.reject(new Error('添加文章内容失败'));
+            }
+        })
+}
