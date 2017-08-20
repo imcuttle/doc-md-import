@@ -1,11 +1,11 @@
-// process.env.DEBUG = '1'
+process.env.DEBUG = '1'
 
 var actions = require('./lib/actions')
 var utils = require('./lib/utils')
 var fs = require('fs')
 
-var text = fs.readFileSync('/Users/yucong02/moka-blog/source/_articles/guide-of-gojs.md').toString()
-var pwd = fs.readFileSync('./password').toString()
+var text = fs.readFileSync('./test/md.md').toString();
+var pwd = fs.readFileSync('./password').toString();
 
 actions
     .login('yucong02', pwd)
@@ -22,13 +22,24 @@ actions
     })
     .then(function (passed) {
         if (passed) {
-            return actions.rename('GoJS Detail')
+            return actions.rename('Doc Import Test')
         }
     })
     .then(function (passed) {
         if (passed) {
-            return actions.addItems(utils.generateItems(text))
+            var items = utils.generateItems(text);
+            actions.patch(items)
+            // return Promise.all([
+            //     actions.patch(items.slice(0, 20)),
+            //     actions.patch(items.slice(20))
+            // ])
         }
+    })
+    .then(function () {
+        // if (obj.passed) {
+        //     var items = obj.items;
+        //     return actions.patch(items.slice(0, 20));
+        // }
     })
 
 
