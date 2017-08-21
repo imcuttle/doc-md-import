@@ -87,7 +87,13 @@ var validCmds = [
     {
         cmd: 'set-password',
         action: function (arg) {
-            setConfig('password', arg);
+            var read = require('read')
+            return new Promise(function (resolve) {
+                read({ prompt: 'Password: ', silent: true }, function(er, password) {
+                    setConfig('password', password);
+                    resolve();
+                })
+            })
         }
     },
     {
@@ -98,48 +104,60 @@ var validCmds = [
     }
 ];
 
-if (cmd) {
-    var found = validCmds.find(function (x) {return x.cmd === cmd});
-    if (found) {
-        found.action.apply(null, argv._.slice(1));
-        process.exit(0);
+function start() {
+    var conf = getConfig();
+    conf.title = cmd || default_title;
+    conf.address = conf.address || 'http://doc.eux.baidu.com/';
+
+    if (conf.username && conf.password) {
+
+        console.log('输入markdown文本，之后 `Ctrl+D`.');
+        u.concat(process.stdin, function (err, buf) {
+            if (err) {
+                console.error(err);
+                process.exit(1);
+            } else {
+                conf.markdown = buf.toString();
+                if (!conf.markdown.trim()) {
+                    console.error('请输入markdown文本！');
+                    process.exit(1);
+                }
+                conf.verbose = opt.verbose;
+                require('../index')(conf)
+                    .then(function (listId) {
+                        console.log('发布成功，快访问查看吧！ %s', conf.address.replace(/\/+$/, '') + '/app/list/' + listId);
+                        process.exit(0);
+                    })
+                    .catch(function (err) {
+                        console.error(err.message);
+                        process.exit(1);
+                    });
+            }
+        });
+
     } else {
-        // console.error('没找到: ' + cmd + ' 命令. 请 `docin -h` 查看帮助.');
-        // process.exit(1);
+        console.error('存在配置未被设置. 请 `docin -h` 查看帮助.');
+        process.exit(1);
     }
 }
 
-var conf = getConfig();
-conf.title = cmd || default_title;
-conf.address = conf.address || 'http://doc.eux.baidu.com/';
-
-if (conf.username && conf.password) {
-
-    console.log('输入markdown文本，之后 `Ctrl+D`.');
-    u.concat(process.stdin, function (err, buf) {
-        if (err) {
-            console.error(err);
-            process.exit(1);
+if (cmd) {
+    var found = validCmds.find(function (x) {return x.cmd === cmd});
+    var ret;
+    if (found) {
+        ret = found.action.apply(null, argv._.slice(1));
+        if (ret && ret.then) {
+            ret.then(function() {
+                process.exit(0);
+            })
         } else {
-            conf.markdown = buf.toString();
-            if (!conf.markdown.trim()) {
-                console.error('请输入markdown文本！');
-                process.exit(1);
-            }
-            conf.verbose = opt.verbose;
-            require('../index')(conf)
-                .then(function (listId) {
-                    console.log('发布成功，快访问查看吧！ %s', conf.address.replace(/\/+$/, '') + '/app/list/' + listId);
-                    process.exit(0);
-                })
-                .catch(function (err) {
-                    console.error(err.message);
-                    process.exit(1);
-                });
+            process.exit(0);
         }
-    });
-
+            
+    } else {
+        start();
+    }
 } else {
-    console.error('存在配置未被设置. 请 `docin -h` 查看帮助.');
-    process.exit(1);
+    start();
 }
+
