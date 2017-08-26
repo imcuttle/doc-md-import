@@ -1,6 +1,6 @@
 {
   "name": "doc-md-import",
-  "version": "1.1.3",
+  "version": "1.0.0",
   "description": "document import from markdown",
   "main": "index.js",
   "scripts": {
