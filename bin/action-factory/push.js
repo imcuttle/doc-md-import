@@ -42,18 +42,29 @@ module.exports = function (files, opt) {
             console.error(err);
             throw err;
         })
-}
+};
 
 
-function push(file, docIn, db, opt) {
-    var text = fs.readFileSync(file, {encoding: 'utf-8'}),
-        relative = u.toRelative(file),
-        title = nps.basename(file).replace(/\.(md|markdown)$/, '');
-
-    text = text.replace(/^\s*@title:(.*?)/i, function (m, t) {
+var getTitle_Text = module.exports.getTitle_Text = function (text, file) {
+    var title = nps.basename(file).replace(/\.(md|markdown)$/, '');
+    text = text.replace(/^\s*---[^]*?title:(.*?)\n[^]*?---/, function (m, t) {
         title = t.trim();
         return '';
     });
+
+    return {
+        title: title,
+        text: text
+    };
+}
+
+function push(file, docIn, db, opt) {
+    var text = fs.readFileSync(file, {encoding: 'utf-8'}),
+        relative = u.toRelative(file);
+
+    var tt = getTitle_Text(text, file);
+    var title = tt.title;
+    text = tt.text;
 
     function addr(listId) {
         return docIn.address.replace(/\/+$/, '') + '/app/list/' + listId
@@ -95,13 +106,10 @@ function push(file, docIn, db, opt) {
                         return newList();
                     }
                     else {
-                        return docIn.empty(listId, true)
+                        return docIn.rm(listId, true)
                             .then(function (passed) {
                                 if (passed) {
-                                    return docIn.insert(listId, text, null, true)
-                                        .then(function (passed) {
-                                            return passed && succ(listId);
-                                        });
+                                    return newList();
                                 }
                             })
                     }

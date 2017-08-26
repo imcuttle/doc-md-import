@@ -18,8 +18,17 @@ module.exports = {
     initDone: '完成初始化！',
 
     pushForce: '强制push (将以本地doc为准，来更新远端)',
-    pushToc: '是否在远端生成目录索引文档',
     pushDesc: 'push本地文档至远端',
+
+    viewDesc: '查看当前有哪些文档记录',
+
+    tocDesc: '根据之前的push记录，生成文章索引在当前文件夹',
+    tocPush: '是否在远端生成目录索引文档',
+    succToc: '文章索引生成成功，请在${1}文件下查看.'
+        + '\n\t如需提交至远端，请执行 `doc-pipe push ${2}`',
+
+    rmDesc: '删除远端的文档',
+    succRm: '成功删除远端文档!',
 
     updateWarnSec1: '文件有更新',
     updateWarnSec2: '本地更新时间',

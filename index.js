@@ -43,7 +43,7 @@ function newDocument(markdown, title) {
         .then(function (list) {
             if (list) {
                 id = list.id;
-                return actions.rename(opt.title)
+                return actions.rename(opt.title, id)
             } else {
                 return Promise.reject(new Error('获取文章'));
             }
@@ -51,7 +51,7 @@ function newDocument(markdown, title) {
         .then(function (passed) {
             if (passed) {
                 var items = utils.generateItems(opt.markdown);
-                return actions.patch(items);
+                return actions.patch(items, id);
             } else {
                 return Promise.reject(new Error('修改文章名失败'));
             }
@@ -139,10 +139,21 @@ function emptyList(listId, noLogin) {
         })
 }
 
+function rmList(listId, noLogin) {
+    var p = noLogin ? Promise.resolve(true) : this._login();
+    return p
+        .then(function (passed) {
+            if (passed) {
+                return actions
+                    .rmList(listId)
+            }
+        })
+}
+
 function DocImport(username, password, address) {
     this.username = username;
     this.password = password;
-    this.address  = address || 'http://doc.eux.baidu.com/';
+    this.address  = address || DocImport.defaultAddress;
 
     if (!this.username
         || !this.password
@@ -153,6 +164,7 @@ function DocImport(username, password, address) {
     }
 }
 
+DocImport.defaultAddress = 'http://doc.eux.baidu.com/';
 
 
 DocImport.prototype.insert = insert;
@@ -173,6 +185,7 @@ DocImport.prototype.newWithoutLogin = newDocument
 DocImport.prototype.newMultiDoc = newMultiDocument;
 DocImport.prototype.get = getList;
 DocImport.prototype.empty = emptyList;
+DocImport.prototype.rm = rmList;
 DocImport.prototype._login = login;
 
 module.exports = DocImport;

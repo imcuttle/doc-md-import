@@ -24,10 +24,34 @@ program
 program
     .command('push [files...]')
     .option('-f, --force', langMap.pushForce)
-    .option('-t, --toc', langMap.pushToc)
+    // .option('-t, --toc', langMap.pushToc)
     .description(langMap.pushDesc)
     .action(function (files, option) {
         require('./action-factory/push')(files, option)
+    });
+
+program
+    .command('rm [files...]')
+    // .option('-t, --toc', langMap.pushToc)
+    .description(langMap.rmDesc)
+    .action(function (files, option) {
+        require('./action-factory/rm')(files, option)
+    });
+
+program
+    .command('view')
+    // .option('-t, --toc', langMap.pushToc)
+    .description(langMap.viewDesc)
+    .action(function () {
+        require('./action-factory/view')()
+    });
+
+program
+    .command('toc [title]')
+    .option('-p, --push', langMap.tocPush)
+    .description(langMap.tocDesc)
+    .action(function (title, opt) {
+        require('./action-factory/toc')(title, opt)
     });
 
 // program.on('--help', function () {
