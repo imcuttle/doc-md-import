@@ -26,7 +26,7 @@ if (opt.help) {
     console.log('  Command:');
     console.log('');
     console.log('     set-username [username]');
-    console.log('     set-password [password]');
+    console.log('     set-password');
     console.log('     set-address [doc web address]             default: ' + default_address);
     console.log('');
     console.log('     insert [listId] (parentId)');
@@ -59,15 +59,7 @@ var docinConfPath = nps.join(docinPath, 'conf.json');
 
 u.ensureFolder(docinPath);
 
-function getConfig() {
-    var conf = {}
-    try {
-        conf = JSON.parse(fs.readFileSync(docinConfPath).toString());
-    } catch (ex) {
-    } finally {
-    }
-    return conf;
-}
+var getConfig = u.getConfig.bind(u);
 
 function setConfig(name, value) {
     var conf = {}, prevConf;
@@ -122,7 +114,7 @@ var validCmds = [
 function startFrame(callback) {
     var conf = getConfig(), markdown;
     conf.title = cmd || default_title;
-    conf.address = conf.address || 'http://doc.eux.baidu.com/';
+    conf.address = conf.address || default_address;
 
     if (conf.username && conf.password) {
         console.log('输入markdown文本，之后 `Ctrl+D` + `Enter`.');

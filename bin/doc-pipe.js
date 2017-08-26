@@ -15,12 +15,20 @@ program
 
 program
     .command('init')
-    .alias('i')
     .option('-f, --force', langMap.initForce)
     .description(langMap.initDesc)
     .action(function (opt) {
         require('./action-factory/init')(opt)
-    })
+    });
+
+program
+    .command('push [files...]')
+    .option('-f, --force', langMap.pushForce)
+    .option('-t, --toc', langMap.pushToc)
+    .description(langMap.pushDesc)
+    .action(function (files, option) {
+        require('./action-factory/push')(files, option)
+    });
 
 // program.on('--help', function () {
 // })

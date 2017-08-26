@@ -4,28 +4,46 @@ var actions = require('./lib/actions')
 var utils = require('./lib/utils')
 var fs = require('fs')
 
-function newDocument(markdown, title) {
-    var opt = {
-        username: this.username,
-        password: this.password,
-        address: this.address,
-        markdown: markdown,
-        title: title
-    }
-
-    return actions
-        .set('address', opt.address)
-        .login(opt.username, opt.password)
+function newMultiDocument(mdTextList) {
+    return this._login()
         .then(function (passed) {
             if (passed) {
-                return actions.getList()
-            } else {
-                return Promise.reject(new Error('登录失败'));
+                return Promise.all(
+                    mdTextList.map(function (o) {
+                        return newDocument(o.markdown, o.title);
+                    })
+                )
             }
         })
+}
+
+function login() {
+    return actions
+        .set('address', this.address)
+        .login(this.username, this.password)
         .then(function (passed) {
-            if (passed) {
-                return actions.rename(opt.title)
+            if (!passed) {
+                return Promise.reject(new Error('登录失败'));
+            } else {
+                return passed
+            }
+        })
+}
+
+function newDocument(markdown, title) {
+    var opt = {
+        markdown: markdown,
+        title: title
+    };
+
+    var id;
+
+    return actions
+        .getList()
+        .then(function (list) {
+            if (list) {
+                id = list.id;
+                return actions.rename(opt.title, id)
             } else {
                 return Promise.reject(new Error('获取文章'));
             }
@@ -33,21 +51,21 @@ function newDocument(markdown, title) {
         .then(function (passed) {
             if (passed) {
                 var items = utils.generateItems(opt.markdown);
-                return actions.patch(items)
+                return actions.patch(items, id);
             } else {
                 return Promise.reject(new Error('修改文章名失败'));
             }
         })
         .then(function (passed) {
             if (passed) {
-                return actions.getListId()
+                return id;
             } else {
                 return Promise.reject(new Error('添加文章内容失败'));
             }
         })
 }
 
-function insert(listId, markdown, parentId) {
+function insert(listId, markdown, parentId, noLogin) {
     if (!listId || !markdown) {
         throw new Error('缺少正确的参数');
     }
@@ -63,20 +81,14 @@ function insert(listId, markdown, parentId) {
         })
     }
 
-    return actions
-        .login(this.username, this.password)
+    return noLogin ? Promise.resolve(true) : this._login()
         .then(function (passed) {
             if (passed) {
-                return true
-            } else {
-                return Promise.reject(new Error('登录失败'));
+                return actions
+                    // .setData('listId', listId)
+                    // .setData('synced', Date.now())
+                    .patch(patch, listId)
             }
-        })
-        .then(function () {
-            return actions
-                .setData('listId', listId)
-                .setData('synced', Date.now())
-                .patch(patch)
         })
         .then(function (passed) {
             if (passed) {
@@ -90,23 +102,77 @@ function insert(listId, markdown, parentId) {
         })
 }
 
+function getList(listId, nologin) {
+    var p = nologin ? Promise.resolve(true) : this._login();
+    return p
+        .then(function (passed) {
+            if (passed) {
+                return actions
+                    .getList(listId)
+            }
+        })
+}
+
+function emptyList(listId, noLogin) {
+    var p = noLogin ? Promise.resolve(true) : this._login();
+    return p
+        .then(function (passed) {
+            if (passed) {
+                return actions
+                    .getList(listId)
+            }
+        })
+        .then(function (list) {
+            var patch = list.items
+                .filter(function (a) {
+                    return !a.parent_item_id;
+                }).map(function (a, i) {
+                    return {
+                        removed: '1',
+                        id: a.id,
+                        seq: a.seq || i + 1,
+                        id_seq: i + 1
+                    }
+                });
+
+            return actions.patch(patch, listId);
+        })
+}
+
 function DocImport(username, password, address) {
     this.username = username;
     this.password = password;
-    this.address  = address;
+    this.address  = address || 'http://doc.eux.baidu.com/';
 
     if (!this.username
         || !this.password
         || !this.address) {
         throw new Error('存在未设置的属性');
+    } else {
+        // this.login()
     }
 }
+
+
 
 DocImport.prototype.insert = insert;
 /**
  *
  * @type {Promise<string>} listId
  */
-DocImport.prototype.new = newDocument;
+DocImport.prototype.new = function (markdown, title) {
+    return this._login()
+        .then(function (passed) {
+            if (passed) {
+                return newDocument(markdown, title);
+            }
+        })
+};
+
+DocImport.prototype.newWithoutLogin = newDocument
+DocImport.prototype.newMultiDoc = newMultiDocument;
+DocImport.prototype.get = getList;
+DocImport.prototype.empty = emptyList;
+DocImport.prototype._login = login;
 
 module.exports = DocImport;

@@ -12,6 +12,12 @@ module.exports = {
 
     log: this.info,
 
+    succ: function () {
+        console.log.apply(console,
+            [chalk.green('[' + i.succPrefix + ']: ')].concat([].slice.call(arguments, 0))
+        )
+    },
+
     info: function () {
         console.log.apply(console,
             [chalk.cyan('[' + i.infoPrefix + ']: ')].concat([].slice.call(arguments, 0))

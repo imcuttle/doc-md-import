@@ -7,19 +7,16 @@ var console = require('../lib/console');
 var u = require('../../lib/utils');
 var i = require('../lib/i18n').langMap;
 
-var fs = require('fs')
+var fs = require('fs');
+var fse = require('fs-extra');
 
 
 
 module.exports = function (opt) {
-    var docPath = u.p(u.DIRNAME);
-
     function start() {
         u.ensureDocFiles();
-        console.info(i.initDone);
+        console.succ(i.initDone);
     }
-
-    u.ensureFolder(docPath);
 
     if (!opt.force) {
         if (u.checkDocPath()) {
@@ -31,6 +28,7 @@ module.exports = function (opt) {
         }
     }
     else {
+        fse.emptyDirSync(u.p(u.DIRNAME));
         start();
     }
 }
