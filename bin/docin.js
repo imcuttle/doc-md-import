@@ -54,8 +54,7 @@ var fs = require('fs');
 var DocImport = require('../index');
 var u = require('../lib/utils');
 
-var home = process.env[(process.platform === 'win32') ? 'USERPROFILE' : 'HOME'];
-var docinPath = nps.resolve(home, '.docin');
+var docinPath = u.docPath();
 var docinConfPath = nps.join(docinPath, 'conf.json');
 
 u.ensureFolder(docinPath);

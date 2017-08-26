@@ -7,7 +7,8 @@
     "test": "cd test && node index.js"
   },
   "bin": {
-    "docin": "./bin/docin.js"
+    "docin": "./bin/docin.js",
+    "doc-pipe": "./bin/doc-pipe.js"
   },
   "keywords": [
     "document",
@@ -17,6 +18,8 @@
   "author": "imcuttle",
   "license": "MIT",
   "dependencies": {
+    "chalk": "^2.1.0",
+    "commander": "^2.11.0",
     "md5": "^2.2.1",
     "minimist": "^1.2.0",
     "read": "^1.0.7"
