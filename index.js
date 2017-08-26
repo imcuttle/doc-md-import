@@ -43,7 +43,7 @@ function newDocument(markdown, title) {
         .then(function (list) {
             if (list) {
                 id = list.id;
-                return actions.rename(opt.title, id)
+                return actions.rename(opt.title)
             } else {
                 return Promise.reject(new Error('获取文章'));
             }
@@ -51,7 +51,7 @@ function newDocument(markdown, title) {
         .then(function (passed) {
             if (passed) {
                 var items = utils.generateItems(opt.markdown);
-                return actions.patch(items, id);
+                return actions.patch(items);
             } else {
                 return Promise.reject(new Error('修改文章名失败'));
             }
