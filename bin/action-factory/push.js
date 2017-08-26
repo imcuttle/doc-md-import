@@ -75,6 +75,11 @@ function push(file, docIn, db, opt) {
         return true;
     }
 
+    function err(error) {
+        console.error(relative, title);
+        console.error(error);
+    }
+
     function newList() {
         return docIn
             .newWithoutLogin(text, title)
@@ -89,7 +94,8 @@ function push(file, docIn, db, opt) {
                 // list.title
                 u.setDB(relative, {updated: list.updated});
                 return succ(list.id);
-            });
+            })
+            .catch(err);
     }
 
     if (!db[relative] || !db[relative].listId) {
@@ -115,6 +121,7 @@ function push(file, docIn, db, opt) {
                             });
                     }
                 })
+                .catch(err)
         }
         else {
             docIn
@@ -142,6 +149,7 @@ function push(file, docIn, db, opt) {
                         }
                     }
                 })
+                .catch(err)
         }
     }
 }

@@ -30,9 +30,14 @@ module.exports = function (title, opt) {
         var title = tt.title;
 
         list.push({
+            file: file,
             title: title,
             listId: listId
         });
+    });
+
+    list = list.sort(function (x, y) {
+        return fs.lstatSync(y.file).ctime - fs.lstatSync(x.file).ctime;
     });
 
     var tocText = generateToc(list, title);
