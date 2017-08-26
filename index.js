@@ -36,13 +36,14 @@ function newDocument(markdown, title) {
         title: title
     };
 
-    var id;
+    var id, maxId;
 
     return actions
         .getList()
         .then(function (list) {
             if (list) {
                 id = list.id;
+                maxId = list.maxId;
                 return actions.rename(opt.title, id)
             } else {
                 return Promise.reject(new Error('获取文章'));
@@ -51,7 +52,7 @@ function newDocument(markdown, title) {
         .then(function (passed) {
             if (passed) {
                 var items = utils.generateItems(opt.markdown);
-                return actions.patch(items, id);
+                return actions.patch(items, id, maxId);
             } else {
                 return Promise.reject(new Error('修改文章名失败'));
             }
@@ -65,7 +66,7 @@ function newDocument(markdown, title) {
         })
 }
 
-function insert(listId, markdown, parentId, noLogin) {
+function insert(listId, markdown, parentId, noLogin, maxId) {
     if (!listId || !markdown) {
         throw new Error('缺少正确的参数');
     }
@@ -81,13 +82,13 @@ function insert(listId, markdown, parentId, noLogin) {
         })
     }
 
-    return noLogin ? Promise.resolve(true) : this._login()
+    return (noLogin ? Promise.resolve(true) : this._login())
         .then(function (passed) {
             if (passed) {
                 return actions
                     // .setData('listId', listId)
                     // .setData('synced', Date.now())
-                    .patch(patch, listId)
+                    .patch(patch, listId, maxId)
             }
         })
         .then(function (passed) {
@@ -124,18 +125,16 @@ function emptyList(listId, noLogin) {
         })
         .then(function (list) {
             var patch = list.items
-                .filter(function (a) {
-                    return !a.parent_item_id;
-                }).map(function (a, i) {
+                .map(function (a, i) {
                     return {
                         removed: '1',
                         id: a.id,
                         seq: a.seq || i + 1,
-                        id_seq: i + 1
+                        id_seq: a.id_seq || i + 1
                     }
                 });
 
-            return actions.patch(patch, listId);
+            return actions.patch(patch, listId, list.maxId);
         })
 }
 

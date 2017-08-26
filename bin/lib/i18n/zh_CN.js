@@ -24,7 +24,7 @@ module.exports = {
 
     tocDesc: '根据之前的push记录，生成文章索引在当前文件夹',
     tocPush: '是否在远端生成目录索引文档',
-    succToc: '文章索引生成成功，请在${1}文件下查看.'
+    succToc: '文章索引生成成功，请在 ${1} 文件下查看.'
         + '\n\t如需提交至远端，请执行 `doc-pipe push ${2}`',
 
     rmDesc: '删除远端的文档',

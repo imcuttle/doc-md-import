@@ -106,12 +106,13 @@ function push(file, docIn, db, opt) {
                         return newList();
                     }
                     else {
-                        return docIn.rm(listId, true)
-                            .then(function (passed) {
-                                if (passed) {
-                                    return newList();
-                                }
+                        docIn.empty(listId, true)
+                            .then(function (p) {
+                                return p && docIn.insert(listId, text, null, true, p.maxId)
                             })
+                            .then(function (p) {
+                                p && succ(listId);
+                            });
                     }
                 })
         }
