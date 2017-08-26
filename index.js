@@ -182,6 +182,9 @@ DocImport.prototype.new = function (markdown, title) {
 
 DocImport.prototype.newWithoutLogin = newDocument
 DocImport.prototype.newMultiDoc = newMultiDocument;
+DocImport.prototype.rename = function (title, listId) {
+    return actions.rename(title, listId)
+};
 DocImport.prototype.get = getList;
 DocImport.prototype.empty = emptyList;
 DocImport.prototype.rm = rmList;

@@ -98,6 +98,20 @@ function push(file, docIn, db, opt) {
             .catch(err);
     }
 
+    function update() {
+        return docIn.empty(listId, true)
+            .then(function (p) {
+                return p && docIn.insert(listId, text, null, true, p.maxId)
+            })
+            .then(function (p) {
+                return p && docIn.rename(title, listId);
+            })
+            .then(function (p) {
+                p && succ(listId);
+            })
+            .catch(err);
+    }
+
     if (!db[relative] || !db[relative].listId) {
         return newList();
     }
@@ -112,13 +126,7 @@ function push(file, docIn, db, opt) {
                         return newList();
                     }
                     else {
-                        docIn.empty(listId, true)
-                            .then(function (p) {
-                                return p && docIn.insert(listId, text, null, true, p.maxId)
-                            })
-                            .then(function (p) {
-                                p && succ(listId);
-                            });
+                        return update();
                     }
                 })
                 .catch(err)
@@ -146,6 +154,7 @@ function push(file, docIn, db, opt) {
                                 i.noUpdate,
                                 addr(listId)
                             );
+                            // return update();
                         }
                     }
                 })
