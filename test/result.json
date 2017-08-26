@@ -1,447 +1,121 @@
 [
   {
-    "type": "empty",
-    "value": "\n",
+    "type": "head",
+    "value": "# ChangeLog\n",
     "id": 1
   },
   {
-    "type": "head",
-    "value": "## a\n",
-    "id": 2
+    "type": "empty",
+    "value": "\n",
+    "id": 2,
+    "parent": 1
   },
   {
-    "type": "head",
-    "value": "### b\n",
+    "type": "list",
+    "value": "- v1.1.0  \n",
     "id": 3,
-    "parent": 2
+    "parent": 1
   },
   {
-    "type": "head",
-    "value": "# c\n",
-    "id": 4
+    "type": "list",
+    "value": "    1. 优化 Api 设计\n",
+    "id": 4,
+    "parent": 3
   },
   {
-    "type": "empty",
-    "value": "\n",
+    "type": "list",
+    "value": "    2. 添加 `insert` 命令\n",
     "id": 5,
-    "parent": 4
+    "parent": 3
   },
   {
-    "type": "list",
-    "value": "1. 多叉树  \n",
+    "type": "empty",
+    "value": "\n",
     "id": 6,
-    "parent": 4
+    "parent": 5
   },
   {
-    "type": "block",
-    "value": "    ```\n        root\n    /   |  \\\n    a1   a2   a3\n    |    / \\    \\\n    null b1  b2   b3\n        |     \\     \\\n        null   null   null\n    ```\n",
+    "type": "list",
+    "value": "- v1.1.1 \n",
     "id": 7,
-    "parent": 6
+    "parent": 1
   },
   {
-    "type": "empty",
-    "value": "    \n",
+    "type": "list",
+    "value": "    1. 优化 List Item 父子判断逻辑\n",
     "id": 8,
-    "parent": 6
+    "parent": 7
   },
   {
-    "type": "block",
-    "value": "    > sds\n    > ssss\n",
+    "type": "empty",
+    "value": "\n",
     "id": 9,
-    "parent": 6
+    "parent": 8
   },
   {
-    "type": "empty",
-    "value": "\n",
+    "type": "list",
+    "value": "- v1.1.2\n",
     "id": 10,
-    "parent": 6
+    "parent": 1
   },
   {
-    "type": "block",
-    "value": "    ```\n        root\n    /   |  \\\n    a1   a2   a3\n    |    / \\    \\\n    null b1  b2   b3\n        |     \\     \\\n        null   null   null\n    ```\n",
+    "type": "list",
+    "value": "    1. 修复 BlockQuote 正则\n",
     "id": 11,
-    "parent": 6
+    "parent": 10
   },
   {
-    "type": "empty",
-    "value": "\n",
+    "type": "list",
+    "value": "    2. 添加 BlockCode 缩进逻辑\n",
     "id": 12,
-    "parent": 6
+    "parent": 10
   },
   {
-    "type": "list",
-    "value": "- item a<space><space>\n",
+    "type": "empty",
+    "value": "\n",
     "id": 13,
-    "parent": 4
+    "parent": 12
   },
   {
-    "type": "empty",
-    "value": "\n",
+    "type": "list",
+    "value": "- v1.1.3  \n",
     "id": 14,
-    "parent": 13
+    "parent": 1
   },
   {
-    "type": "unrelated",
-    "value": "    childB of a\n",
+    "type": "list",
+    "value": "    1. 修复\n",
     "id": 15,
-    "parent": 13
+    "parent": 14
   },
   {
-    "type": "empty",
-    "value": "\n",
+    "type": "block",
+    "value": "        ```\n        ## a\n        ### b\n        # c\n        ```\n",
     "id": 16,
-    "parent": 13
+    "parent": 15
   },
   {
-    "type": "block",
-    "value": "  ```\n  i'm child of a\n  ```\n",
+    "type": "empty",
+    "value": "\n",
     "id": 17,
-    "parent": 13
+    "parent": 15
   },
   {
     "type": "empty",
-    "value": "\n",
+    "value": "                \n",
     "id": 18,
-    "parent": 13
+    "parent": 15
   },
   {
-    "type": "unrelated",
-    "value": "i'm not child of a\n",
+    "type": "list",
+    "value": "- v2.0  \n",
     "id": 19,
-    "parent": 4
+    "parent": 1
   },
   {
-    "type": "empty",
-    "value": "\n",
+    "type": "unrelated",
+    "value": "    添加`doc-pipe`指令",
     "id": 20,
-    "parent": 4
-  },
-  {
-    "type": "list",
-    "value": "- item b\n",
-    "id": 21,
-    "parent": 4
-  },
-  {
-    "type": "unrelated",
-    "value": "    childB of b\n",
-    "id": 22,
-    "parent": 21
-  },
-  {
-    "type": "empty",
-    "value": "\n",
-    "id": 23,
-    "parent": 21
-  },
-  {
-    "type": "unrelated",
-    "value": "    i'm child of b\n",
-    "id": 24,
-    "parent": 21
-  },
-  {
-    "type": "empty",
-    "value": "\n",
-    "id": 25,
-    "parent": 21
-  },
-  {
-    "type": "empty",
-    "value": "\n",
-    "id": 26,
-    "parent": 21
-  },
-  {
-    "type": "unrelated",
-    "value": "i'm not child of b\n",
-    "id": 27,
-    "parent": 4
-  },
-  {
-    "type": "empty",
-    "value": "\n",
-    "id": 28,
-    "parent": 4
-  },
-  {
-    "type": "empty",
-    "value": "\n",
-    "id": 29,
-    "parent": 4
-  },
-  {
-    "type": "list",
-    "value": "- c\n",
-    "id": 30,
-    "parent": 4
-  },
-  {
-    "type": "list",
-    "value": "   - d\n",
-    "id": 31,
-    "parent": 30
-  },
-  {
-    "type": "list",
-    "value": " - e\n",
-    "id": 32,
-    "parent": 31
-  },
-  {
-    "type": "empty",
-    "value": "\n",
-    "id": 33,
-    "parent": 32
-  },
-  {
-    "type": "head",
-    "value": "# a   \n",
-    "id": 34
-  },
-  {
-    "type": "unrelated",
-    "value": "aaaaaa\n",
-    "id": 35,
-    "parent": 34
-  },
-  {
-    "type": "empty",
-    "value": "\n",
-    "id": 36,
-    "parent": 34
-  },
-  {
-    "type": "head",
-    "value": "### b \n",
-    "id": 37,
-    "parent": 34
-  },
-  {
-    "type": "unrelated",
-    "value": "bbbbbb\n",
-    "id": 38,
-    "parent": 37
-  },
-  {
-    "type": "head",
-    "value": "## c  \n",
-    "id": 39,
-    "parent": 34
-  },
-  {
-    "type": "unrelated",
-    "value": "ccccc\n",
-    "id": 40,
-    "parent": 39
-  },
-  {
-    "type": "head",
-    "value": "## d \n",
-    "id": 41,
-    "parent": 34
-  },
-  {
-    "type": "unrelated",
-    "value": "dddddd \n",
-    "id": 42,
-    "parent": 41
-  },
-  {
-    "type": "head",
-    "value": "# e   \n",
-    "id": 43
-  },
-  {
-    "type": "unrelated",
-    "value": "eeeee\n",
-    "id": 44,
-    "parent": 43
-  },
-  {
-    "type": "empty",
-    "value": "\n",
-    "id": 45,
-    "parent": 43
-  },
-  {
-    "type": "unrelated",
-    "value": "#ss\n",
-    "id": 46,
-    "parent": 43
-  },
-  {
-    "type": "unrelated",
-    "value": "i'm an apple.     \n",
-    "id": 47,
-    "parent": 43
-  },
-  {
-    "type": "unrelated",
-    "value": "i'm an egg.       \n",
-    "id": 48,
-    "parent": 43
-  },
-  {
-    "type": "block",
-    "value": "> ```             \n> code A           \n> ```      \n",
-    "id": 49,
-    "parent": 43
-  },
-  {
-    "type": "block",
-    "value": "```\ncode C\n```\n",
-    "id": 50,
-    "parent": 43
-  },
-  {
-    "type": "empty",
-    "value": "\n",
-    "id": 51,
-    "parent": 43
-  },
-  {
-    "type": "block",
-    "value": "|sds|xsd|\n|--|:--:|\n|sd|xxxx|\n\n",
-    "id": 52,
-    "parent": 43
-  },
-  {
-    "type": "head",
-    "value": " ## A-1             \n",
-    "id": 53,
-    "parent": 43
-  },
-  {
-    "type": "empty",
-    "value": "                  \n",
-    "id": 54,
-    "parent": 53
-  },
-  {
-    "type": "unrelated",
-    "value": "text in A-1       \n",
-    "id": 55,
-    "parent": 53
-  },
-  {
-    "type": "empty",
-    "value": "                  \n",
-    "id": 56,
-    "parent": 53
-  },
-  {
-    "type": "list",
-    "value": "1. A-1-1           \n",
-    "id": 57,
-    "parent": 53
-  },
-  {
-    "type": "unrelated",
-    "value": "description1 in A-1-1   \n",
-    "id": 58,
-    "parent": 57
-  },
-  {
-    "type": "unrelated",
-    "value": "description2 in A-1-1\n",
-    "id": 59,
-    "parent": 57
-  },
-  {
-    "type": "list",
-    "value": "2. A-1-2\n",
-    "id": 60,
-    "parent": 53
-  },
-  {
-    "type": "unrelated",
-    "value": "description in A-1-2\n",
-    "id": 61,
-    "parent": 60
-  },
-  {
-    "type": "empty",
-    "value": "\n",
-    "id": 62,
-    "parent": 60
-  },
-  {
-    "type": "unrelated",
-    "value": "#ss\n",
-    "id": 63,
-    "parent": 53
-  },
-  {
-    "type": "list",
-    "value": "3. A-1-3\n",
-    "id": 64,
-    "parent": 53
-  },
-  {
-    "type": "empty",
-    "value": "\n",
-    "id": 65,
-    "parent": 64
-  },
-  {
-    "type": "list",
-    "value": " - ssds  \n",
-    "id": 66,
-    "parent": 64
-  },
-  {
-    "type": "list",
-    "value": "  - xxxsw \n",
-    "id": 67,
-    "parent": 66
-  },
-  {
-    "type": "head",
-    "value": "## xx是多少\n",
-    "id": 68,
-    "parent": 67
-  },
-  {
-    "type": "list",
-    "value": "    - ### sssd\n",
-    "id": 69,
-    "parent": 68
-  },
-  {
-    "type": "empty",
-    "value": "\n",
-    "id": 70,
-    "parent": 69
-  },
-  {
-    "type": "head",
-    "value": "## ssx\n",
-    "id": 71,
-    "parent": 43
-  },
-  {
-    "type": "unrelated",
-    "value": "not description\n",
-    "id": 72,
-    "parent": 71
-  },
-  {
-    "type": "empty",
-    "value": "\n",
-    "id": 73,
-    "parent": 71
-  },
-  {
-    "type": "block",
-    "value": "~~~\ncode B\n~~~\n",
-    "id": 74,
-    "parent": 71
-  },
-  {
-    "type": "empty",
-    "value": "\n",
-    "id": 75,
-    "parent": 71
+    "parent": 19
   }
 ]

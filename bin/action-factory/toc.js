@@ -22,6 +22,7 @@ module.exports = function (title, opt) {
     var list = [];
 
     keys.forEach(function (file) {
+        if (file === './doc-pipe-toc.md') return;
         var listId = d.db[file].listId;
         if (!listId) return;
         file = u.p(file);
@@ -35,7 +36,7 @@ module.exports = function (title, opt) {
     });
 
     var tocText = generateToc(list, title);
-    var ps = u.p('doc-pipe-toc.md');
+    var ps = u.p('./doc-pipe-toc.md');
     fs.writeFileSync(ps, tocText);
 
     console.succ(i._i(i.succToc, ps, u.toRelative(ps)));
@@ -51,7 +52,7 @@ module.exports = function (title, opt) {
 };
 
 function generateToc(list, title) {
-    var content = ''
+    var content = '';
     if (title) {
         content += '---\ntitle: ' + title + '\n---\n';
     }

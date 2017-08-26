@@ -36,5 +36,5 @@ module.exports = {
 
     noUpdate: '服务器没有数据更新',
 
-    succPush: 'push成功! '
+    succPush: ' push成功! '
 }

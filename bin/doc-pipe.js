@@ -6,6 +6,7 @@ var fs = require('fs');
 
 var DocImport = require('../index');
 var u = require('../lib/utils');
+var console = require('./lib/console');
 var i18n = require('./lib/i18n');
 var langMap = i18n.langMap
 
@@ -53,6 +54,13 @@ program
     .action(function (title, opt) {
         require('./action-factory/toc')(title, opt)
     });
+
+program
+    .command('*')
+    .action(function (cmd) {
+        console.error('不存在的命令`' + cmd + '`');
+    });
+
 
 // program.on('--help', function () {
 // })
