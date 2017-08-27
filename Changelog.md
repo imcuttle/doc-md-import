@@ -22,3 +22,6 @@
                 
 - v2.0  
     添加`doc-pipe`指令
+    
+- v2.0.7
+    添加 `docin edit [title]`

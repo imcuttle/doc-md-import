@@ -56,9 +56,9 @@ program
     });
 
 program
-    .command('*')
+    // .command('*')
     .action(function (cmd) {
-        console.error('不存在的命令`' + cmd + '`');
+        console.error('不存在的命令 `' + cmd + '`');
     });
 
 

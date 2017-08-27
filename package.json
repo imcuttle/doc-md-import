@@ -6,6 +6,7 @@
   "scripts": {
     "test": "cd test && node index.js"
   },
+  "preferGlobal": true,
   "bin": {
     "docin": "./bin/docin.js",
     "doc-pipe": "./bin/doc-pipe.js"

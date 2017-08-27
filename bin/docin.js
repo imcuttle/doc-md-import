@@ -30,6 +30,7 @@ if (opt.help) {
     console.log('     set-address [doc web address]             default: ' + default_address);
     console.log('');
     console.log('     insert [listId] (parentId)');
+    console.log('     edit [title]                              cli edit mode for better performance.');
     console.log('');
     console.log('     [title]                                   default: ' + default_title);
     console.log('');
@@ -108,10 +109,39 @@ var validCmds = [
         action: function (listId, parentId) {
             return insertDoc(listId, parentId)
         }
+    },
+    {
+        cmd: 'edit',
+        action: function (arg) {
+            // arg = arg || 'vim';
+            var editor = process.env.EDITOR || 'vim';
+            var p = u.j(u.HOME, u.DIRNAME);
+            var editFile = u.j(p, 'BLACK_BOARD');
+            u.ensureFolder(p);
+
+            var child = require('child_process').spawn(editor, [editFile], {stdio: 'inherit'});
+            var oldContent = fs.existsSync(editFile) ? fs.readFileSync(editFile, {encoding: 'utf-8'}) : '';
+
+            child.on('exit', function (code) {
+                if (code === 0) {
+                    var nowContent = fs.readFileSync(editFile, {encoding: 'utf-8'});
+                    if (nowContent !== oldContent) {
+                        newDoc(fs.createReadStream(editFile), arg || default_title);
+                        process.on('exit', function () {
+                            fs.existsSync(editFile) && fs.unlinkSync(editFile);
+                        });
+                    }
+                }
+            });
+
+            return 'skip';
+        }
     }
 ];
 
-function startFrame(callback) {
+function startFrame(readableOrCallback, callback) {
+    var readable = readableOrCallback && readableOrCallback.readable ? readableOrCallback : process.stdin;
+    callback = typeof readableOrCallback === 'function' ? readableOrCallback : callback;
     var conf = getConfig(), markdown;
     conf.title = cmd || default_title;
     conf.address = conf.address || default_address;
@@ -119,7 +149,7 @@ function startFrame(callback) {
     if (conf.username && conf.password) {
         console.log('输入markdown文本，之后 `Ctrl+D` + `Enter`.');
 
-        u.concat(process.stdin, function (err, buf) {
+        u.concat(readable, function (err, buf) {
             if (err) {
                 console.error(err);
                 process.exit(1);
@@ -144,10 +174,10 @@ function startFrame(callback) {
     }
 }
 
-function newDoc() {
-    startFrame(function (docImport, markdown, conf) {
+function newDoc(readable, title) {
+    startFrame(readable, function (docImport, markdown, conf) {
         docImport
-            .new(markdown, conf.title)
+            .new(markdown, title || conf.title)
             .then(function (listId) {
                 console.log('发布成功，快访问查看吧！ %s', conf.address.replace(/\/+$/, '') + '/app/list/' + listId);
                 process.exit(0);
@@ -190,7 +220,7 @@ if (cmd) {
             ret.then(function() {
                 process.exit(0);
             })
-        } else {
+        } else if (ret !== 'skip') {
             process.exit(0);
         }
     } else {
