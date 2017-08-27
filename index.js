@@ -1,8 +1,10 @@
 // process.env.DEBUG = '1'
 
-var actions = require('./lib/actions')
-var utils = require('./lib/utils')
-var fs = require('fs')
+var actions = require('./lib/actions');
+var utils = require('./lib/utils');
+var Error = require('./lib/ListIdError');
+var fs = require('fs');
+
 
 function newMultiDocument(mdTextList) {
     return this._login()
@@ -23,7 +25,7 @@ function login() {
         .login(this.username, this.password)
         .then(function (passed) {
             if (!passed) {
-                return Promise.reject(new Error('登录失败'));
+                return Promise.reject(new Error('登录失败', null));
             } else {
                 return passed
             }
@@ -46,7 +48,7 @@ function newDocument(markdown, title) {
                 maxId = list.maxId;
                 return actions.rename(opt.title, id)
             } else {
-                return Promise.reject(new Error('获取文章'));
+                return Promise.reject(new Error('获取文章', id));
             }
         })
         .then(function (passed) {
@@ -54,21 +56,21 @@ function newDocument(markdown, title) {
                 var items = utils.generateItems(opt.markdown);
                 return actions.patch(items, id, maxId);
             } else {
-                return Promise.reject(new Error('修改文章名失败'));
+                return Promise.reject(new Error('修改文章名失败', id));
             }
         })
         .then(function (passed) {
             if (passed) {
                 return id;
             } else {
-                return Promise.reject(new Error('添加文章内容失败'));
+                return Promise.reject(new Error('添加文章内容失败', id));
             }
         })
 }
 
 function insert(listId, markdown, parentId, noLogin, maxId) {
     if (!listId || !markdown) {
-        throw new Error('缺少正确的参数');
+        throw new Error('缺少正确的参数', listId);
     }
 
     var patch = utils.generateItems(markdown);
@@ -98,7 +100,7 @@ function insert(listId, markdown, parentId, noLogin, maxId) {
                     nodeId: parentId
                 }
             } else {
-                return Promise.reject(new Error('添加文章内容失败'));
+                return Promise.reject(new Error('添加文章内容失败', listId));
             }
         })
 }
@@ -157,7 +159,7 @@ function DocImport(username, password, address) {
     if (!this.username
         || !this.password
         || !this.address) {
-        throw new Error('存在未设置的属性');
+        throw new Error('存在未设置的属性', null);
     } else {
         // this.login()
     }

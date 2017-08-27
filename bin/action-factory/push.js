@@ -5,6 +5,7 @@
 
 var console = require('../lib/console');
 var u = require('../../lib/utils');
+var ListIdError = require('../../lib/ListIdError');
 var DocImport = require('../../index');
 var i = require('../lib/i18n').langMap;
 
@@ -64,6 +65,8 @@ function push(file, docIn, db, opt) {
 
     var tt = getTitle_Text(text, file);
     var title = tt.title;
+    var listId = db[relative] && db[relative].listId;
+    var updated = db[relative] ? db[relative].updated : '';
     text = tt.text;
 
     function addr(listId) {
@@ -76,17 +79,21 @@ function push(file, docIn, db, opt) {
     }
 
     function err(error) {
-        console.error(relative, title);
+        console.error(relative, title, listId);
         console.error(error);
+        if (error instanceof ListIdError) {
+            return error.listId && docIn.rm(error.listId, true)
+        }
     }
 
     function newList() {
         return docIn
             .newWithoutLogin(text, title)
-            .then(function (listId) {
-                u.setDB(relative, {listId: listId});
+            .then(function (id) {
+                // listId = id;
+                u.setDB(relative, {listId: id});
                 return docIn
-                    .get(listId, true)
+                    .get(id, true)
             })
             .then(function (list) {
                 // list.id
@@ -112,12 +119,10 @@ function push(file, docIn, db, opt) {
             .catch(err);
     }
 
-    if (!db[relative] || !db[relative].listId) {
+    if (!listId) {
         return newList();
     }
     else {
-        var listId = db[relative].listId;
-        var updated = db[relative].updated;
         if (opt.force) {
             docIn
                 .get(listId, true)
