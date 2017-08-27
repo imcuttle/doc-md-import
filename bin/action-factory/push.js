@@ -79,7 +79,7 @@ function push(file, docIn, db, opt) {
     }
 
     function err(error) {
-        console.error(relative, title, listId);
+        console.error(relative, title);
         console.error(error);
         if (error instanceof ListIdError) {
             return error.listId && docIn.rm(error.listId, true)

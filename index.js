@@ -48,7 +48,7 @@ function newDocument(markdown, title) {
                 maxId = list.maxId;
                 return actions.rename(opt.title, id)
             } else {
-                return Promise.reject(new Error('获取文章', id));
+                return Promise.reject(new Error('获取文章'));
             }
         })
         .then(function (passed) {
