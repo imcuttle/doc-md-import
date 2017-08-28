@@ -56,6 +56,15 @@ program
     });
 
 program
+    .command('perm [files...]')
+    .option('-t, --type', langMap.permissionTypeDesc)
+    .description(langMap.permissionDesc)
+    .action(function (args, cmd) {
+        var obj = require('minimist')(cmd.parent.rawArgs.slice(3));
+        require('./action-factory/permission')(obj._, {type: obj.t || obj.type})
+    });
+
+program
     // .command('*')
     .action(function (cmd) {
         console.error('不存在的命令 `' + cmd + '`');

@@ -8,9 +8,11 @@ var i = require('./i18n').langMap
 
 
 
-module.exports = {
+var _console = {
 
-    log: this.info,
+    log: function () {
+        this.info.apply(this, arguments);
+    },
 
     succ: function () {
         console.log.apply(console,
@@ -42,3 +44,5 @@ module.exports = {
         )
     }
 };
+
+module.exports = _console

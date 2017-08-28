@@ -151,6 +151,17 @@ function rmList(listId, noLogin) {
         })
 }
 
+function permission(listId, type, noLogin) {
+    var p = noLogin ? Promise.resolve(true) : this._login();
+    return p
+        .then(function (passed) {
+            if (passed) {
+                return actions
+                    .perm(listId, type)
+            }
+        })
+}
+
 function DocImport(username, password, address) {
     this.username = username;
     this.password = password;
@@ -188,6 +199,7 @@ DocImport.prototype.rename = function (title, listId) {
     return actions.rename(title, listId)
 };
 DocImport.prototype.get = getList;
+DocImport.prototype.permission = permission;
 DocImport.prototype.empty = emptyList;
 DocImport.prototype.rm = rmList;
 DocImport.prototype._login = login;

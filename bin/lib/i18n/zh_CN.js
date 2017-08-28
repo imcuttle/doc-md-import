@@ -22,6 +22,13 @@ module.exports = {
 
     viewDesc: '查看当前有哪些文档记录',
 
+    permissionDesc: '设置文档权限',
+    permissionTypeDesc: '可用的选项 `pri/ro/pub/s-pub`',
+    errorPermissionType: '错误的选项值. 可用的选项值: `pri/ro/pub/s-pub`.',
+
+    succPermission: '权限设置成功.',
+    failPermission: '权限设置失败.',
+
     tocDesc: '根据之前的push记录，生成文章索引在当前文件夹',
     tocPush: '是否在远端生成目录索引文档',
     succToc: '文章索引生成成功，请在 ${1} 文件下查看.'
@@ -29,6 +36,8 @@ module.exports = {
 
     rmDesc: '删除远端的文档',
     succRm: '成功删除远端文档!',
+
+    failRm: '删除远端文档失败.',
 
     updateWarnSec1: '文件有更新',
     updateWarnSec2: '本地更新时间',

@@ -11,7 +11,12 @@ var i = require('../lib/i18n').langMap;
 var fs = require('fs');
 var nps = require('path');
 
-
+var typeMap = {
+    'pri': 'private',
+    'ro': 'readonly',
+    'pub': 'public',
+    's-pub': 'semi-public'
+}
 
 module.exports = function (files, opt) {
     u.ensureDocFiles();
@@ -20,6 +25,15 @@ module.exports = function (files, opt) {
         console.error(i.existNullConf);
         process.exit(1);
     }
+
+    if (!opt.type || !typeMap[opt.type]) {
+        console.error(i.errorPermissionType);
+        process.exit(1);
+    }
+    else {
+        opt.type = typeMap[opt.type];
+    }
+
 
     var docImport = new DocImport(d.conf.username, d.conf.password, d.conf.address);
 
@@ -34,7 +48,7 @@ module.exports = function (files, opt) {
 
                 return Promise.all(
                     container.map(function (file) {
-                        return rm(file, docImport, d.db, opt)
+                        return perm(file, docImport, d.db, opt)
                     })
                 );
             }
@@ -46,29 +60,32 @@ module.exports = function (files, opt) {
 }
 
 
-function rm(file, docIn, db, opt) {
+function perm(file, docIn, db, opt) {
     var relative = u.toRelative(file);
 
+    function addr(listId) {
+        return docIn.address.replace(/\/+$/, '') + '/app/list/' + listId
+    }
+
     function succ(listId) {
-        console.succ(relative, i.succRm);
+        console.succ(relative, i.succPermission, opt.type, ',', addr(listId));
         return true;
     }
 
     function fail(listId) {
-        console.error(relative, i.failRm);
+        console.error(relative, i.failPermission, opt.type, ',', addr(listId));
         return false;
     }
 
-
     if (db[relative] && db[relative].listId) {
         return docIn
-            .rm(db[relative].listId, true)
+            .permission(db[relative].listId, opt.type, true)
             .then(function (passed) {
-                passed && succ(db[relative].listId) && u.setDB(relative, null);
+                passed && succ(db[relative].listId);
                 !passed && fail(db[relative].listId);
             })
     } else {
-        fail();
+        console.error(relative, i.failPermission, opt.type)
     }
 
 }
