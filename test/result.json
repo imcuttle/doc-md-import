@@ -1,121 +1,789 @@
 [
   {
-    "type": "head",
-    "value": "# ChangeLog\n",
+    "type": "empty",
+    "value": "\n",
     "id": 1
   },
   {
-    "type": "empty",
-    "value": "\n",
-    "id": 2,
-    "parent": 1
+    "type": "head",
+    "value": "## a\n",
+    "id": 2
   },
   {
-    "type": "list",
-    "value": "- v1.1.0  \n",
+    "type": "head",
+    "value": "### b\n",
     "id": 3,
-    "parent": 1
+    "parent": 2
   },
   {
-    "type": "list",
-    "value": "    1. 优化 Api 设计\n",
-    "id": 4,
-    "parent": 3
+    "type": "head",
+    "value": "# c\n",
+    "id": 4
   },
   {
-    "type": "list",
-    "value": "    2. 添加 `insert` 命令\n",
+    "type": "empty",
+    "value": "\n",
     "id": 5,
-    "parent": 3
+    "parent": 4
   },
   {
-    "type": "empty",
-    "value": "\n",
+    "type": "list",
+    "value": "1. 多叉树  \n",
     "id": 6,
-    "parent": 5
-  },
-  {
-    "type": "list",
-    "value": "- v1.1.1 \n",
-    "id": 7,
-    "parent": 1
-  },
-  {
-    "type": "list",
-    "value": "    1. 优化 List Item 父子判断逻辑\n",
-    "id": 8,
-    "parent": 7
-  },
-  {
-    "type": "empty",
-    "value": "\n",
-    "id": 9,
-    "parent": 8
-  },
-  {
-    "type": "list",
-    "value": "- v1.1.2\n",
-    "id": 10,
-    "parent": 1
-  },
-  {
-    "type": "list",
-    "value": "    1. 修复 BlockQuote 正则\n",
-    "id": 11,
-    "parent": 10
-  },
-  {
-    "type": "list",
-    "value": "    2. 添加 BlockCode 缩进逻辑\n",
-    "id": 12,
-    "parent": 10
-  },
-  {
-    "type": "empty",
-    "value": "\n",
-    "id": 13,
-    "parent": 12
-  },
-  {
-    "type": "list",
-    "value": "- v1.1.3  \n",
-    "id": 14,
-    "parent": 1
-  },
-  {
-    "type": "list",
-    "value": "    1. 修复\n",
-    "id": 15,
-    "parent": 14
+    "parent": 4
   },
   {
     "type": "block",
-    "value": "        ```\n        ## a\n        ### b\n        # c\n        ```\n",
-    "id": 16,
-    "parent": 15
+    "value": "    ```\n        root\n    /   |  \\\n    a1   a2   a3\n    |    / \\    \\\n    null b1  b2   b3\n        |     \\     \\\n        null   null   null\n    ```\n",
+    "id": 7,
+    "parent": 6
+  },
+  {
+    "type": "empty",
+    "value": "    \n",
+    "id": 8,
+    "parent": 6
+  },
+  {
+    "type": "block",
+    "value": "    > sds\n    > ssss\n",
+    "id": 9,
+    "parent": 6
   },
   {
     "type": "empty",
     "value": "\n",
-    "id": 17,
-    "parent": 15
+    "id": 10,
+    "parent": 6
+  },
+  {
+    "type": "block",
+    "value": "    ```\n        root\n    /   |  \\\n    a1   a2   a3\n    |    / \\    \\\n    null b1  b2   b3\n        |     \\     \\\n        null   null   null\n    ```\n",
+    "id": 11,
+    "parent": 6
   },
   {
     "type": "empty",
-    "value": "                \n",
-    "id": 18,
-    "parent": 15
+    "value": "\n",
+    "id": 12,
+    "parent": 6
   },
   {
     "type": "list",
-    "value": "- v2.0  \n",
-    "id": 19,
-    "parent": 1
+    "value": "- item a<space><space>\n",
+    "id": 13,
+    "parent": 4
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 14,
+    "parent": 13
   },
   {
     "type": "unrelated",
-    "value": "    添加`doc-pipe`指令",
+    "value": "    childB of a\n",
+    "id": 15,
+    "parent": 13
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 16,
+    "parent": 13
+  },
+  {
+    "type": "block",
+    "value": "  ```\n  i'm child of a\n  ```\n",
+    "id": 17,
+    "parent": 13
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 18,
+    "parent": 13
+  },
+  {
+    "type": "unrelated",
+    "value": "i'm not child of a\n",
+    "id": 19,
+    "parent": 4
+  },
+  {
+    "type": "empty",
+    "value": "\n",
     "id": 20,
-    "parent": 19
+    "parent": 4
+  },
+  {
+    "type": "list",
+    "value": "- item b\n",
+    "id": 21,
+    "parent": 4
+  },
+  {
+    "type": "unrelated",
+    "value": "    childB of b\n",
+    "id": 22,
+    "parent": 21
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 23,
+    "parent": 21
+  },
+  {
+    "type": "unrelated",
+    "value": "    i'm child of b\n",
+    "id": 24,
+    "parent": 21
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 25,
+    "parent": 21
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 26,
+    "parent": 21
+  },
+  {
+    "type": "unrelated",
+    "value": "i'm not child of b\n",
+    "id": 27,
+    "parent": 4
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 28,
+    "parent": 4
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 29,
+    "parent": 4
+  },
+  {
+    "type": "list",
+    "value": "- c\n",
+    "id": 30,
+    "parent": 4
+  },
+  {
+    "type": "list",
+    "value": "   - d\n",
+    "id": 31,
+    "parent": 30
+  },
+  {
+    "type": "list",
+    "value": " - e\n",
+    "id": 32,
+    "parent": 31
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 33,
+    "parent": 32
+  },
+  {
+    "type": "head",
+    "value": "# a   \n",
+    "id": 34
+  },
+  {
+    "type": "unrelated",
+    "value": "aaaaaa\n",
+    "id": 35,
+    "parent": 34
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 36,
+    "parent": 34
+  },
+  {
+    "type": "head",
+    "value": "### b \n",
+    "id": 37,
+    "parent": 34
+  },
+  {
+    "type": "unrelated",
+    "value": "bbbbbb\n",
+    "id": 38,
+    "parent": 37
+  },
+  {
+    "type": "head",
+    "value": "## c  \n",
+    "id": 39,
+    "parent": 34
+  },
+  {
+    "type": "unrelated",
+    "value": "ccccc\n",
+    "id": 40,
+    "parent": 39
+  },
+  {
+    "type": "head",
+    "value": "## d \n",
+    "id": 41,
+    "parent": 34
+  },
+  {
+    "type": "unrelated",
+    "value": "dddddd \n",
+    "id": 42,
+    "parent": 41
+  },
+  {
+    "type": "head",
+    "value": "# e   \n",
+    "id": 43
+  },
+  {
+    "type": "unrelated",
+    "value": "eeeee\n",
+    "id": 44,
+    "parent": 43
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 45,
+    "parent": 43
+  },
+  {
+    "type": "unrelated",
+    "value": "#ss\n",
+    "id": 46,
+    "parent": 43
+  },
+  {
+    "type": "unrelated",
+    "value": "i'm an apple.     \n",
+    "id": 47,
+    "parent": 43
+  },
+  {
+    "type": "unrelated",
+    "value": "i'm an egg.       \n",
+    "id": 48,
+    "parent": 43
+  },
+  {
+    "type": "block",
+    "value": "> ```             \n> code A           \n> ```      \n",
+    "id": 49,
+    "parent": 43
+  },
+  {
+    "type": "block",
+    "value": "```\ncode C\n```\n",
+    "id": 50,
+    "parent": 43
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 51,
+    "parent": 43
+  },
+  {
+    "type": "block",
+    "value": "|sds|xsd|\n|--|:--:|\n|sd|xxxx|\n\n",
+    "id": 52,
+    "parent": 43
+  },
+  {
+    "type": "head",
+    "value": " ## A-1             \n",
+    "id": 53,
+    "parent": 43
+  },
+  {
+    "type": "empty",
+    "value": "                  \n",
+    "id": 54,
+    "parent": 53
+  },
+  {
+    "type": "unrelated",
+    "value": "text in A-1       \n",
+    "id": 55,
+    "parent": 53
+  },
+  {
+    "type": "empty",
+    "value": "                  \n",
+    "id": 56,
+    "parent": 53
+  },
+  {
+    "type": "list",
+    "value": "1. A-1-1           \n",
+    "id": 57,
+    "parent": 53
+  },
+  {
+    "type": "unrelated",
+    "value": "description1 in A-1-1   \n",
+    "id": 58,
+    "parent": 57
+  },
+  {
+    "type": "unrelated",
+    "value": "description2 in A-1-1\n",
+    "id": 59,
+    "parent": 57
+  },
+  {
+    "type": "list",
+    "value": "2. A-1-2\n",
+    "id": 60,
+    "parent": 53
+  },
+  {
+    "type": "unrelated",
+    "value": "description in A-1-2\n",
+    "id": 61,
+    "parent": 60
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 62,
+    "parent": 60
+  },
+  {
+    "type": "unrelated",
+    "value": "#ss\n",
+    "id": 63,
+    "parent": 53
+  },
+  {
+    "type": "list",
+    "value": "3. A-1-3\n",
+    "id": 64,
+    "parent": 53
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 65,
+    "parent": 64
+  },
+  {
+    "type": "list",
+    "value": " - ssds  \n",
+    "id": 66,
+    "parent": 64
+  },
+  {
+    "type": "list",
+    "value": "  - xxxsw \n",
+    "id": 67,
+    "parent": 66
+  },
+  {
+    "type": "head",
+    "value": "## xx是多少\n",
+    "id": 68,
+    "parent": 67
+  },
+  {
+    "type": "list",
+    "value": "    - ### sssd\n",
+    "id": 69,
+    "parent": 68
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 70,
+    "parent": 69
+  },
+  {
+    "type": "head",
+    "value": "## ssx\n",
+    "id": 71,
+    "parent": 43
+  },
+  {
+    "type": "unrelated",
+    "value": "not description\n",
+    "id": 72,
+    "parent": 71
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 73,
+    "parent": 71
+  },
+  {
+    "type": "block",
+    "value": "~~~\ncode B\n~~~\n",
+    "id": 74,
+    "parent": 71
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 75,
+    "parent": 71
+  },
+  {
+    "type": "block",
+    "value": "---\ntitle: Offer入职项目复盘 (余聪)\ndatetime: 2018-01-02 21:27:42\n---\n",
+    "id": 76,
+    "parent": 71
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 77,
+    "parent": 71
+  },
+  {
+    "type": "head",
+    "value": "## i18n\n",
+    "id": 78,
+    "parent": 43
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 79,
+    "parent": 78
+  },
+  {
+    "type": "unrelated",
+    "value": "我的 i18n 从无到有的过程如下：  \n",
+    "id": 80,
+    "parent": 78
+  },
+  {
+    "type": "list",
+    "value": "1. 提取需要翻译的 i18n (含中文) 文本  \n",
+    "id": 81,
+    "parent": 78
+  },
+  {
+    "type": "unrelated",
+    "value": "    使用方法:  \n",
+    "id": 82,
+    "parent": 81
+  },
+  {
+    "type": "unrelated",
+    "value": "     `matriks2 gen-zh src/frontend/OfferHandling/**/*.js > zh_list.js`\n",
+    "id": 83,
+    "parent": 81
+  },
+  {
+    "type": "list",
+    "value": "2. PM 提供翻译完成的 excel 文件（或者其他格式）\n",
+    "id": 84,
+    "parent": 78
+  },
+  {
+    "type": "list",
+    "value": "3. 利用 tingcen 的 [cyou-i18n](https://www.npmjs.com/package/cyou-i18n) 批量替换 `_i('xxx')`\n",
+    "id": 85,
+    "parent": 78
+  },
+  {
+    "type": "list",
+    "value": "4. 后续部分的修改利用**i18n在线编辑**修改（可以提供给PM）  \n",
+    "id": 86,
+    "parent": 78
+  },
+  {
+    "type": "unrelated",
+    "value": "    使用方法：\n",
+    "id": 87,
+    "parent": 86
+  },
+  {
+    "type": "list",
+    "value": "    - 在url上加上`?i18n-edit-live=true` 或者 `localStorage.setItem('i18n-edit-live', true)`, 然后刷新页面\n",
+    "id": 88,
+    "parent": 86
+  },
+  {
+    "type": "list",
+    "value": "    - 默认只在 **生产环境** 中生效\n",
+    "id": 89,
+    "parent": 86
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 90,
+    "parent": 89
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 91,
+    "parent": 89
+  },
+  {
+    "type": "head",
+    "value": "## 深链及其相关 hoc/decorator/models\n",
+    "id": 92,
+    "parent": 43
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 93,
+    "parent": 92
+  },
+  {
+    "type": "head",
+    "value": "### HOC\n",
+    "id": 94,
+    "parent": 92
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 95,
+    "parent": 94
+  },
+  {
+    "type": "block",
+    "value": "|名|描述|使用|参数|\n|--|-----|---|--|\n|lazy-render|延迟渲染，可以用于Loading的渲染，延迟500ms，才真正显示Loading| `@lazyrender(timeout: number)`|timeout: 800|\n|uncontrolled|用于非控制组件，绑定componentWillReceiveProps，同步props到state| `@uncontrolled(...name: oneOfType([array, string))`|name: 需要绑定的props的keyName，可以是string，array；如需将props.a 同步到 state.b，则传入['a', 'b']|\n|style-useable-hmr|起初使用该hoc是为了解决样式的HMR问题，主要在生命周期中绑定style.use/unuse方法|`@suh(style: object)`|style: usable 的 style 对象|\n|state-in-out|将State或者new State传入，并加上一些与视图绑定的生命周期钩子，state实例中应该有`init/update/exit`方法对应View层中的`componentWillMount/componentWillReceiveProps/componentWillUnmont`|`@sio(ClassOrInstance, name: string, initialData)`|ClassOrInstance可以是方法或者State实例；name是绑定在View中的key名，默认为`localState`|\n",
+    "id": 96,
+    "parent": 94
+  },
+  {
+    "type": "unrelated",
+    "value": "**注意：** state-in-out中的`init/update/exit`方法是下面decorator autorun/url-sync 的前提条件\n",
+    "id": 97,
+    "parent": 94
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 98,
+    "parent": 94
+  },
+  {
+    "type": "head",
+    "value": "### decorator\n",
+    "id": 99,
+    "parent": 92
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 100,
+    "parent": 99
+  },
+  {
+    "type": "unrelated",
+    "value": "|名|描述|使用|参数\n",
+    "id": 101,
+    "parent": 99
+  },
+  {
+    "type": "unrelated",
+    "value": "|-|----|----|---\n",
+    "id": 102,
+    "parent": 99
+  },
+  {
+    "type": "unrelated",
+    "value": "|url-sync|深链: 在state中需要init/update/exit来同步视图的生命周期。同时提供在react View中使用的decorator|`@urlsync(rename: string, { initialWrite: false }) prop = 'xx'`|rename: 重命名，默认为prop名；initialWrite: 是否初始是写在url上\n",
+    "id": 103,
+    "parent": 99
+  },
+  {
+    "type": "unrelated",
+    "value": "|autorun| 对mobx的封装，加上了dispose的生命周期控制，要求同url-sync。同时提供在react View中使用的decorator|`@autorun method(dispose) {}`|dispose: 调用dispose 会销毁该autorun，初始dispose为undefined\n",
+    "id": 104,
+    "parent": 99
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 105,
+    "parent": 99
+  },
+  {
+    "type": "head",
+    "value": "### models\n",
+    "id": 106,
+    "parent": 92
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 107,
+    "parent": 106
+  },
+  {
+    "type": "unrelated",
+    "value": "|名|描述|使用\n",
+    "id": 108,
+    "parent": 106
+  },
+  {
+    "type": "unrelated",
+    "value": "|-|----|----\n",
+    "id": 109,
+    "parent": 106
+  },
+  {
+    "type": "unrelated",
+    "value": "|Root|提供`toJSON/setValue/assignShallow/assign/init/exit`方法| `class State extends Root`\n",
+    "id": 110,
+    "parent": 106
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 111,
+    "parent": 106
+  },
+  {
+    "type": "head",
+    "value": "## babel-preset-es2015-ie\n",
+    "id": 112,
+    "parent": 43
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 113,
+    "parent": 112
+  },
+  {
+    "type": "unrelated",
+    "value": "兼容 ie>=9 环境下的 babel 插件预设。  \n",
+    "id": 114,
+    "parent": 112
+  },
+  {
+    "type": "unrelated",
+    "value": "可能会遇到的坑：\n",
+    "id": 115,
+    "parent": 112
+  },
+  {
+    "type": "unrelated",
+    "value": "https://www.npmjs.com/package/babel-plugin-transform-es2015-classes#loose\n",
+    "id": 116,
+    "parent": 112
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 117,
+    "parent": 112
+  },
+  {
+    "type": "head",
+    "value": "## ie9-polyfill\n",
+    "id": 118,
+    "parent": 43
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 119,
+    "parent": 118
+  },
+  {
+    "type": "list",
+    "value": "1. ie9 不能使用 `console.log.apply`\n",
+    "id": 120,
+    "parent": 118
+  },
+  {
+    "type": "list",
+    "value": "2. ie9 不能使用[dom4](https://www.w3.org/TR/dom/)标准的方法属性，如classList\n",
+    "id": 121,
+    "parent": 118
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 122,
+    "parent": 121
+  },
+  {
+    "type": "block",
+    "value": "```html\n<!--[if lte IE 9]>\n    <script src=\"../extra/ie9-polyfill.js\"></script>\n<![endif]-->\n```\n",
+    "id": 123,
+    "parent": 118
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 124,
+    "parent": 118
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 125,
+    "parent": 118
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 126,
+    "parent": 118
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 127,
+    "parent": 118
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 128,
+    "parent": 118
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 129,
+    "parent": 118
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 130,
+    "parent": 118
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 131,
+    "parent": 118
+  },
+  {
+    "type": "empty",
+    "value": "\n",
+    "id": 132,
+    "parent": 118
   }
 ]
